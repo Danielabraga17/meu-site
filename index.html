@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniela - Criadora de Sites</title>
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <!-- Tela de carregamento -->
+  <div id="carregando">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Modal de Imagem -->
+  <div id="modal-imagem" class="modal">
+    <span class="fechar">&times;</span>
+    <img class="modal-conteudo" id="imagem-ampliada">
+  </div>
+
+  <!-- Menu de navegação -->
+  <nav class="menu">
+    <a href="#inicio">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <!-- Ícones sociais fixos -->
+  <div class="social-fixo">
+    <a href="https://wa.me/5535999832517" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.instagram.com/danibragasite/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/share/1HTETdSKDN/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header class="cabecalho" id="inicio">
+    <img src="{{ url_for('static', filename='daniela.jpg') }}" alt="Foto Daniela" class="foto-principal">
+    <h1>Daniela Rodrigues Braga</h1>
+    <p><span id="digitando"></span></p>
+    <a href="https://wa.me/5535999832517" target="_blank" class="botao-whatsapp">
+      <i class="fab fa-whatsapp"></i> Fale comigo no WhatsApp
+    </a>
+    <div class="mensagem-boas-vindas">
+      <i class="fas fa-hand-sparkles"></i>
+      <span id="mensagem-digitando"></span>
+    </div>
+  </header>
+
+  <!-- Seção Sobre -->
+  <section id="sobre">
+    <h2>Sobre Mim</h2>
+    <p>Sou criadora de sites profissionais, com foco em visual moderno, experiência de usuário e resultados. Transformo ideias em presença digital.</p>
+  </section>
+
+  <!-- Seção Serviços -->
+  <section id="servicos">
+    <h2>Meus Serviços</h2>
+    <ul>
+      <li><i class="fas fa-laptop-code"></i> Criação de sites para empresas, profissionais e lojas</li>
+      <li><i class="fas fa-mobile-alt"></i> Sites responsivos (funcionam no celular)</li>
+      <li><i class="fas fa-palette"></i> Design moderno e personalizado</li>
+      <li><i class="fab fa-whatsapp"></i> Botão de WhatsApp e formulários de contato</li>
+      <li><i class="fas fa-server"></i> Hospedagem e publicação no ar</li>
+    </ul>
+  </section>
+
+  <!-- Seção Portfólio -->
+  <section id="portfolio">
+    <!-- Seção Portfólio -->
+<section id="portfolio">
+  <h2><i class="fas fa-laptop-code"></i> Meu Portfólio</h2>
+  <div class="galeria">
+    <img src="{{ url_for('static', filename='dentista.jpg') }}" alt="Site Dentista">
+    <img src="{{ url_for('static', filename='doces.jpg') }}" alt="Site Doces">
+    <img src="{{ url_for('static', filename='pizzas.jpg') }}" alt="Site Pizzas">
+  </div>
+</section>
+  <!-- Seção Depoimentos -->
+  <section id="depoimentos">
+    <h2><i class="fas fa-comment-dots"></i> Depoimentos</h2>
+    <div class="carrossel">
+      <div class="depoimento ativo">
+        <p>"A Daniela criou um site lindo para o meu negócio. Profissionalismo e agilidade do começo ao fim!"</p>
+        <strong>— Mariana Alves</strong>
+      </div>
+      <div class="depoimento">
+        <p>"Meu novo site ficou incrível, super moderno e funcional. Recomendo demais!"</p>
+        <strong>— João Mendes</strong>
+      </div>
+      <div class="depoimento">
+        <p>"Amei o atendimento e o resultado. Agora meus clientes me encontram com facilidade."</p>
+        <strong>— Carla Souza</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Contato -->
+  <section id="contato">
+    <h2>Contato</h2>
+    {% if enviado %}
+      <p><strong>Mensagem enviada com sucesso!</strong></p>
+    {% endif %}
+    <form method="POST">
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="email" placeholder="Seu e-mail" required>
+      <textarea name="mensagem" placeholder="Digite sua mensagem" rows="4" required></textarea>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
+    </form>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2025 Daniela Rodrigues Braga. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Botão "Voltar ao Topo" -->
+  <div id="topo" title="Voltar ao topo">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Scroll suave
+      const menuLinks = document.querySelectorAll("nav.menu a");
+      const sections = document.querySelectorAll("section");
+      const topo = document.getElementById("topo");
+
+      menuLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const id = link.getAttribute("href").slice(1);
+          document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      window.addEventListener("scroll", () => {
+        let scrollPos = window.scrollY + window.innerHeight / 3;
+        sections.forEach(section => {
+          if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+            menuLinks.forEach(link => link.classList.remove("active"));
+            const ativo = document.querySelector(`nav.menu a[href="#${section.id}"]`);
+            if (ativo) ativo.classList.add("active");
+          }
+        });
+        topo.style.display = window.scrollY > 150 ? "flex" : "none";
+      });
+
+      topo.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Animação fade-in
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.1 });
+
+      sections.forEach(section => observer.observe(section));
+    });
+
+    // Loader
+    window.addEventListener("load", () => {
+      const carregando = document.getElementById("carregando");
+      carregando.style.opacity = "0";
+      carregando.style.visibility = "hidden";
+
+      // Mensagem de boas-vindas
+      setTimeout(() => {
+        const msg = document.querySelector(".mensagem-boas-vindas");
+        if (msg) {
+          msg.style.transition = "opacity 1s ease";
+          msg.style.opacity = "0";
+        }
+      }, 5000);
+    });
+
+    // Digitação animada
+    document.addEventListener("DOMContentLoaded", () => {
+      const mensagem = "Olá! Eu sou a Daniela, e posso criar o site ideal para o seu negócio!";
+      const span = document.getElementById("mensagem-digitando");
+      let index = 0;
+      function digitar() {
+        if (index < mensagem.length) {
+          span.textContent += mensagem.charAt(index);
+          index++;
+          setTimeout(digitar, 50);
+        }
+      }
+      digitar();
+    });
+
+    // Modal de imagem
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById("modal-imagem");
+      const imagemAmpliada = document.getElementById("imagem-ampliada");
+      const fecharModal = document.querySelector(".fechar");
+
+      document.querySelectorAll(".galeria img").forEach(img => {
+        img.addEventListener("click", () => {
+          modal.style.display = "flex";
+          imagemAmpliada.src = img.getAttribute("src");
+          imagemAmpliada.alt = img.alt;
+        });
+      });
+
+      fecharModal.addEventListener("click", () => modal.style.display = "none");
+
+      window.addEventListener("click", e => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+
+      window.addEventListener("keydown", e => {
+        if (e.key === "Escape") modal.style.display = "none";
+      });
+    });
+
+    // Carrossel automático de depoimentos
+    document.addEventListener("DOMContentLoaded", () => {
+      let depoimentos = document.querySelectorAll(".depoimento");
+      let index = 0;
+
+      function mostrarDepoimento() {
+        depoimentos.forEach(dep => dep.classList.remove("ativo"));
+        depoimentos[index].classList.add("ativo");
+        index = (index + 1) % depoimentos.length;
+      }
+
+      setInterval(mostrarDepoimento, 4000);
+    });
+  const canvas = document.getElementById("fundo-particulas");
+  const ctx = canvas.getContext("2d");
+  let w, h;
+  let particulas = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  for (let i = 0; i < 100; i++) {
+    particulas.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  function desenhar() {
+    ctx.clearRect(0, 0, w, h);
+    for (let p of particulas) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff44";
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if (p.x < 0 || p.x > w) p.dx *= -1;
+      if (p.y < 0 || p.y > h) p.dy *= -1;
+    }
+    requestAnimationFrame(desenhar);
+  }
+
+  desenhar();
+  </script>
+<a href="https://wa.me/5535999832517?text=Olá%2C%20quero%20um%20orçamento%20para%20um%20site!" target="_blank" class="botao-neon">
+  Solicitar Orçamento
+</a>
+<h1 class="flutuar">Daniela Rodrigues Braga</h1>
+<div class="emoji-animado">👋</div>
+<div class="destaques">
+  <div class="item">
+    <i class="fas fa-star"></i>
+    <p>+100 clientes felizes</p>
+  </div>
+  <div class="item">
+    <i class="fas fa-clock"></i>
+    <p>Entrega rápida</p>
+  </div>
+  <div class="item">
+    <i class="fas fa-shield-alt"></i>
+    <p>Serviço confiável</p>
+  </div>
+</body>
+</html>
